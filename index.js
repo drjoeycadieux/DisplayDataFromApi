@@ -9,7 +9,6 @@ request.onreadystatechange = function () {
     console.log("Status:", this.status);
     console.log("Headers:", this.getAllResponseHeaders());
     console.log("Body:", this.responseText);
-    document.getElementById("myData").innerHTML = this.responseText;
   }
 };
 

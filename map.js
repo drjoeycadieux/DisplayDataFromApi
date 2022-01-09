@@ -1,5 +1,3 @@
-import "https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js";
-
 mapboxgl.accessToken =
   "pk.eyJ1Ijoiam9leWNyZWF0b3IiLCJhIjoiY2t5MXR4Z3p2MDZoMzJwcWt0eXN2a2N2NyJ9.8YrcNEDK812L6d-DrFbrtg";
 const map = new mapboxgl.Map({
@@ -27,15 +25,15 @@ map.on("load", () => {
   });
 });
 
-map.on("load", function () {
-  $.ajax({
+map.on("load", () => {
+  map.addSource({
     url: "https://www.spotternetwork.org/positions",
-    type: "POST",
+    type: "geojson",
     proccessData: false,
     dataType: "JSON",
     success: function (json) {
       map.addSource("chasers", {
-        type: "geojson",
+        type: "json",
         data: json
       });
 
@@ -59,4 +57,6 @@ map.on("load", function () {
 });
 //  mapbox marker
 
-new mapboxgl.Marker({}).setLngLat([0, 0]).addTo(map);
+new mapboxgl.Marker({})
+  .setLngLat([marker.latitude, marker.longitude])
+  .addTo(map);
